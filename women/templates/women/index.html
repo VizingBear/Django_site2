@@ -1,0 +1,17 @@
+{% extends 'base.html' %}  <!--наследование от base.html -->
+
+{% block content %}
+<ul class="list-articles">
+	{% for p in posts %}
+
+			<li><h2>{{p.title}}</h2>
+    {% autoescape off %}  <!-- все теги, которые есть в этом блоке - не будут экранированы -->
+	{{p.content|linebreaks|truncatewords:40}} <!--ограничение на вывод количества слов, в данном случае 40. linebreaks позволяет создавать переходы по строкам, как в файле py -->
+    {% endautoescape %}
+			<div class="clear"></div>
+			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">Читать пост</a></p>  <!-- в данном случае p. - это модель класса Women-->
+			</li>
+
+	{% endfor %}
+</ul>
+{% endblock %}
