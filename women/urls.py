@@ -7,17 +7,17 @@ from . import converter
 register_converter(converter.FourDigitYearConverter, 'year4') # вынесли концертер динамического URL посредством регулярного выражения в отдельный файл
 
 urlpatterns = [
-    path('', views.index, name = 'home'), # Пустой путь дает нам перейти на главную страницу
+    path('', views.WomenHome.as_view(), name = 'home'), # Пустой путь дает нам перейти на главную страницу
                          # include позволяет подключить автоматом все необходимые маршруты. 'women.urls' - ссылка на файл, содержащий маршруты (файл нужно создать)
                          # name = 'home' - это именнованный маршрут. позволяет ссылаться по нему
     path('about/', views.about, name='about'),
-    path('addpage/', views.addpage, name='add_page'),
+    path('addpage/', views.ADDPage.as_view(), name='add_page'),
     path('contact/', views.contact, name='contact'),
     path('login/', views.login, name='login'),
-    path('post/<slug:post_slug>', views.show_post, name='post'), #Обращение к функции show_post, файла views
-    path('category/<slug:cat_slug>', views.show_category, name ='category'),
-    path('tag/<slug:tag_slug>/', views.show_tag_postlist, name='tag') #
-
+    path('post/<slug:post_slug>', views.ShowPost.as_view(), name='post'), #Обращение к функции show_post, файла views
+    path('category/<slug:cat_slug>', views.WomenCategory.as_view(), name ='category'),
+    path('tag/<slug:tag_slug>/', views.TagPostList.as_view(), name='tag'), #
+    path('edit/<slug:slug>/', views.UpdatePage.as_view(), name='edit_page'), #
 
 
 #   path('cats/<int:cat_id>/', views.cat, name = 'cats_id'), # Прописанное здесь позволяет нам в дирректории /cat использовать доп. id (id дополнительно передается в функцию)
